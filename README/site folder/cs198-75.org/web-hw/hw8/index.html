@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!--
+
+* AerWebCopy Engine [version 6.3.0]
+* Copyright Aeroson Systems & Co.
+* File mirrored from https://cs198-75.org/web-hw/hw8/
+* At UTC time: 2022-04-16 18:32:03.272811
+
+--><head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../../css/576edd17__bootstrap.min.css">
+        <link rel="stylesheet" href="../../css/f3613f74__main.css">
+        <link href="../../css/71e50ca9__open-iconic-bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/8f366496__bootstrap-toc.min.css" rel="stylesheet">
+        <link rel="shortcut icon" type="image/png" href="../../css/281d7064__cubstart.ico">
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="../../js/c843c76d__jquery.min.js"></script>
+        <script src="../../js/dd0486de__bootstrap.bundle.min.js"></script>
+        <script src="../../js/e191d984__bootstrap-toc.min.js"></script>
+        <script src="../../../cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/3ff53791__highlight.min.js"></script>
+        <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/c76286cf__github.min.css">
+        <title>Cubstart | CS 198-75</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-light navbar-expand-md align-items-center" style="background: #307c9c; position: fixed; width: 100%; z-index: 100">
+            <div class="container container-nav">
+                <img src="../../../calhacks-sierra.s3-us-west-2.amazonaws.com/assets/branding/cffa0fab__cubstart.png" style=" object-fit: none; transform: scale(0.11); transform-origin: left top; margin-bottom: -260px; margin-right:
+                        -175px; " height="300px" width="205px">
+                <a class="navbar-brand brand-berkeley" href="/" style="color: #f2f2f2">
+                    Cubstart DeCal</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../file_2193180e.pwc" style="color: #f2f2f2">
+                                Schedule
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../file_a7aa9464.pwc" style="color: #f2f2f2">
+                                Staff
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../file_bf03f0dd.pwc" style="color: #f2f2f2">
+                                Syllabus
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="side-nav" class="side-nav">
+            <h6>Navigation</h6>
+            <div id="nav-topics"><!-- Dynamically generate the a tags for headers -->
+            </div>
+        </div>
+        <div id="main" class="main-content">
+            <h1>Project 8: Build a Social Network
+                <span class="cubstart-color">(Due Fri, 4/8 @ 11:59pm)</span>
+            </h1>
+            <hr>
+            <h2 id="introduction">Introduction</h2>
+            <p>For your final homework, you'll be building out a fully functioning social media web application with MongoDB, Express, React.js, and Node.js, or more commonly known as the MERN stack. The following video is a demo of the finished product you'll achieve:
+
+&lt;div style="display: flex; justify-content: center; margin-top: 2rem"&gt;
+
+&lt;iframe width="600" height="350"
+src="https://www.youtube.com/embed/xthyE9Q5EkA"&gt;
+&lt;/iframe&gt;
+
+&lt;/div&gt;</p>
+            <h2 id="project-set-up">Project Set-up</h2>
+            <p>Get started by pulling from the skeleton repository.</p>
+            <p>To fetch the skeleton, you will git clone the skeleton repository into your
+                <mark><code>cubstart</code></mark>
+                directory. While at your
+                <mark><code>cubstart</code></mark>
+                directory, run the following bash command: </p><pre><code>git clone --depth=1 --branch=master https://github.com/brandon-m-wang/cubstart-hw8-skeleton.git hw8 &amp;&amp; rm -rf ./hw8/.git</code></pre>
+                You should now see a new
+                <mark><code>hw8</code></mark>
+                folder in the directory. Accessing it includes all the contents of the project.
+            
+            
+            
+                
+                    <h2>Part 1: Backend Dependencies and Environment Set-up</h2>
+                
+            
+                
+                    <p>Open a terminal and navigate to the &lt;mark&gt;&lt;code&gt;node-rest-api&lt;/code&gt;&lt;/mark&gt; folder. Run &lt;mark&gt;&lt;code&gt;npm install&lt;/code&gt;&lt;/mark&gt; which will install all the necessary dependencies for the backend component of this project. Under this same directory, create a file called &lt;mark&gt;&lt;code&gt;.env&lt;/code&gt;&lt;/mark&gt;. You'll come back to this later.</p>
+                
+            
+                
+                    <h2>Part 2: Creating your MongoDB Atlas Database</h2>
+                
+            
+                
+                    <p>Navigate to &lt;a href="https://account.mongodb.com/account/register" target="_blank"&gt;https://account.mongodb.com/account/register&lt;/a&gt; and create a MongoDB account. After MongoDB generates your first project, go to "Databases" and hit "Create" to create a new cluster. Choose the free "Shared" plan. Choose to authenticate with username and password, and create a them.</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        https://calhacks-sierra.s3.us-west-2.amazonaws.com/assets/cubstart/Screen+Shot+2022-01-09+at+2.58.21+AM.png
+                    </div>
+                
+            
+                
+                    <p>For the allowed connections, enter the following IP address to allow all IP addresses to modify the database (for convenience, you may secure your database however you want).</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        https://calhacks-sierra.s3.us-west-2.amazonaws.com/assets/cubstart/Screen+Shot+2022-01-09+at+3.00.17+AM.png
+                    </div>
+                
+            
+                
+                    <p>Within your new cluster, hit "Create Database" (or "Add My Own Data") and enter the following information. Your database will be named "hw8" for this project with 2 eventual collections - "users" and "posts."</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        https://calhacks-sierra.s3.us-west-2.amazonaws.com/assets/cubstart/Screen+Shot+2022-01-09+at+2.43.35+AM.png
+                    </div>
+                
+            
+                
+                    <p>Hit "Connect," and then choose to "Connect your application." Copy the connection string given to you.</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        https://calhacks-sierra.s3.us-west-2.amazonaws.com/assets/cubstart/Screen+Shot+2022-01-09+at+2.55.24+AM.png
+                    </div>
+                
+            
+                
+                    <div class="inline-img-container">
+                        https://calhacks-sierra.s3.us-west-2.amazonaws.com/assets/cubstart/Screen+Shot+2022-01-09+at+3.08.21+AM.png
+                    </div>
+                
+            
+                
+                    <p>Make the necessary replacements, and insert the connection string in one line into your &lt;mark&gt;&lt;code&gt;.env&lt;/code&gt;&lt;/mark&gt; file as such:</p>
+                
+            
+                
+                    <pre><code class="language-cpp">MONGO_URL = your_string</code></pre>
+                
+            
+                
+                    <p>The purpose of this file is to simplify the development process when you need to reference the database URL repeatedly, assigning it to an environment variable accessible across all project files.</p>
+                
+            
+                
+                    <h2>Part 3: Configuring your Node.js Webserver, Routes, and Middleware</h2>
+                
+            
+                
+                    <p>You'll begin setting up your Node.js webserver in &lt;mark&gt;&lt;code&gt;index.js&lt;/code&gt;&lt;/mark&gt;. The &lt;mark&gt;&lt;code&gt;index.js&lt;/code&gt;&lt;/mark&gt; file is what is defined to be your endpoint (in &lt;mark&gt;&lt;code&gt;package.json&lt;/code&gt;&lt;/mark&gt;) and is also where your API routes are going to be defined. You need to load the contents of the &lt;mark&gt;&lt;code&gt;.env&lt;/code&gt;&lt;/mark&gt; file in, and to do so insert the following line:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">dotenv.config();</code></pre>
+                
+            
+                
+                    <p>Next, in order to connect to your MongoDB, you'll be using mongoose, a middleware designed to simplify access to your MongoDB data through "models," which are defined as schemas that determine the structure of your documents within your "posts" and "users" collections. Connect the mongoose middleware as such, and write in helpful console log string for your own development purposes:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">mongoose.connect(
+  process.env.MONGO_URL,
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+  () =&gt; {
+    console.log("");
+  }
+);</code></pre>
+                
+            
+                
+                    <p>Some additional middleware you'll be implementing in this project are:
+
+&lt;ul&gt;
+&lt;li&gt;express.json() - to give a clean json format on HTTP response&lt;/li&gt;
+&lt;li&gt;helmet() - to secure your HTTP response headers&lt;/li&gt;
+&lt;li&gt;morgan("common") - to log timestamps, errors, and other helpful HTTP request data&lt;/li&gt;
+&lt;/ul&gt;
+
+You don't need to understand the underlying abstraction of this technologies, just knowing what they are and what they do is enough. Notice that the const &lt;mark&gt;&lt;code&gt;app&lt;/code&gt;&lt;/mark&gt; is defined as your Express application instance. To incorporate this middleware into your Express app you do:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">app.use(express.json());
+app.use(helmet());
+app.use(morgan("common"));</code></pre>
+                
+            
+                
+                    <p>Now, you'll define some routes for your API endpoints. Because this application is attempting to recreate a microservices approach to building functionality, each endpoint handles a function independent of the others. The three endpoints you'll be building handle users, posts, and authentication. For now, you can tell Express to route them to their respective files in the &lt;code&gt;&lt;mark&gt;./routes&lt;/mark&gt;&lt;/code&gt; folder, pointing all requests to the webserver on "/api/&lt;endpoint&gt;" to that endpoint (e.g. http://localhost:8800/api/users). To do so, follow the format defined below for the authentication route, and do the remaining two for users and posts (hint: all route files are loaded in at the top of the file with require):</p>
+                
+            
+                
+                    <pre><code class="language-javascript">app.use("/api/auth", authRoute);
+// "/api/posts"
+// "/api/users"</code></pre>
+                
+            
+                
+                    <p>The webserver will be served locally on port 8080 as defined by the last bit of code. Every time you start your webserver locally, you'll get a console message displayed as well.</p>
+                
+            
+                
+                    <h2>Part 4: Creating your MongoDB Models</h2>
+                
+            
+                
+                    <p>Navigate to the &lt;mark&gt;&lt;code&gt;models&lt;/code&gt;&lt;/mark&gt; folder, and into &lt;mark&gt;&lt;code&gt;Post.js&lt;/code&gt;&lt;/mark&gt;. Here, you'll define your schema for post data documents. On paper, try thinking about what kinds of data you need for any given post; you'll probably need to know which user posted it, the contents of the post, and who liked it. Notice that mongoose allows you to create a schema using two parameters. The second parameter is for options (e.g. timestamping when an object is put into the DB), and the first is the actual structure of your documents in the "posts" collection. Fill in the first parameter object using the following guiding schema:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">userId: {
+  type: String,
+  required: true,
+},
+description: {
+  type: String,
+  max: 500,
+  required: true,
+},
+image: {
+  type: String,
+},
+likes: {
+  type: Array,
+  default: [],
+}</code></pre>
+                
+            
+                
+                    <p>The following line containing &lt;mark&gt;&lt;code&gt;module.exports&lt;/code&gt;&lt;/mark&gt; indicates the return value of require() when loading in resources from your models. Again, mongoose offers a convenient "model" function which returns a document-like class that can be instantiated by passing in a similar object with post information. This class connects you to the MongoDB, and allows you to interact directly with document collections. You'll get to see this later.</p>
+                
+            
+                
+                    <p>Moving onto your user document schema, a similar process. What kind of information would you need for each user? Username, e-mail, password, profile photo, where they're from, bio, etc. All the information necessary for your project is defined below, simply repeat the process as you did for your post schema:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">username: {
+  type: String,
+  require: true,
+  min: 3,
+  max: 20,
+  unique: true,
+},
+email: {
+  type: String,
+  required: true,
+  max: 50,
+  unique: true,
+},
+password: {
+  type: String,
+  required: true,
+  min: 6,
+},
+profilePicture: {
+  type: String,
+  default: "",
+},
+coverPicture: {
+  type: String,
+  default: "",
+},
+followers: {
+  type: Array,
+  default: [],
+},
+following: {
+  type: Array,
+  default: [],
+},
+description: {
+  type: String,
+  max: 50,
+},
+city: {
+  type: String,
+  max: 50,
+},
+from: {
+  type: String,
+  max: 50,
+},
+relationship: {
+  type: Number,
+  enum: [1, 2, 3],
+},</code></pre>
+                
+            
+                
+                    <h2>Part 5: Routing in Express</h2>
+                
+            
+                
+                    <p>A router object is an isolated instance of middleware and routes. You can think of it as a &#8220;mini-application,&#8221; capable only of performing middleware and routing functions. Every Express application has a built-in app router. Once you&#8217;ve created a router object, you can add middleware and HTTP method routes (such as get, put, post, and so on) to it just like an application.
+
+</p>
+                
+            
+                
+                    <p>Create an express router instance with the following line of code. You'll need to do this across all of your router files in the folder (a total of 3).</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const router = express.Router();</code></pre>
+                
+            
+                
+                    <h2>Part 6: Authentication Endpoints</h2>
+                
+            
+                
+                    <p>Now, you'll be building your authentication endpoint. There'll be two requests you need to handle: one for logging in and one for registering a new user. For registration, notice that the &lt;mark&gt;&lt;code&gt;router.post()&lt;/code&gt;&lt;/mark&gt; method is being utilized, as registering a new user is best suited to being a POST request. The endpoint is defined at "/api/auth/register" as you previously specified the route to endpoints in this file as beginning with "/api/auth." The second parameter is an asynchronous function taking in a request (req) and response (res) object which you'll manipulate to produce the correct response.</p>
+                
+            
+                
+                    <p>You'll notice that async functions are going to be crucial to every aspect of this project, as this is how you can avoid null errors when JavaScript runs lines without waiting for data to finish resolving. You can ignore the // PASSWORD ENCRYPTION contents, as it's a simple method to encrypt user passwords to be held in the DB. You want the request object (req) to contain properties fitting your User model, so it is safe to assume that it does so (when you eventually write the code for utilizing this endpoint on the front-end). As such, you can instantiate your user model using the properties of the request body as follows (don't forget to use the encrypted password):</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const newUser = await new User({
+  username: req.body.username,
+  email: req.body.email,
+  password: hashedPassword,
+  description: req.body.description,
+  city: req.body.city,
+  from: req.body.from,
+  relationship: req.body.relationship,
+});
+</code></pre>
+                
+            
+                
+                    <p>Now you need to save the user into the DB. Recall that the user model you defined exports as a mongoose Model giving you a means to manipulate your DB directly. This is now saved into your variable &lt;code&gt;&lt;mark&gt;newUser&lt;/mark&gt;&lt;/code&gt;. To save the user in your DB and to give a successful response (HTTP 200) with the user object, simply apply the following lines under // SAVE USER INTO MONGODB:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const user = await newUser.save();
+res.status(200).json(user);</code></pre>
+                
+            
+                
+                    <p>For the login endpoint, you'll notice a similar structure as registering, just some different logic within the async function. Try to understand the code that's already there: &lt;mark&gt;&lt;code&gt;user&lt;/code&gt;&lt;/mark&gt; is assigned to the user in the DB if it exists, otherwise it will be null. The &lt;mark&gt;&lt;code&gt;findOne()&lt;/code&gt;&lt;/mark&gt; method accepts an object as a search parameter, in this case search by email, since your primary user login/registration mechanism is by email + password. Then, if the user is null, give a 404 via the response  (res) object and break out of the function. If there is a user by the given email, proceed to the next step: password validation. Now there is an &lt;mark&gt;&lt;code&gt;attemptPassword&lt;/code&gt;&lt;/mark&gt; variable which represents a boolean, true if the password if the given password matches that user's password, and false otherwise. Your job is to validate this password. You want to give a 400 response (bad request) if the password is wrong before the line with the 200 response (login successful). Write this underneath // VALIDATE PASSWORD.</p>
+                
+            
+                
+                    <p>Of course, at the end of the file, you export your authentication router for use in other areas of your application.</p>
+                
+            
+                
+                    <h2>Part 7: Posts Endpoints</h2>
+                
+            
+                
+                    <p>Moving into the posts endpoint, you'll have five main functionalities: creating a post, liking/unliking a post, getting a post, getting all of one user's posts, and getting a "timeline."</p>
+                
+            
+                
+                    <p>To start, the post creation endpoint is very similar to what you've done in authentication, you create a new post model from the request body, and simply save it and give it a successful response status. Within the try block of // CREATE POST:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const newPost = new Post(req.body);
+const savedPost = await newPost.save();
+res.status(200).json(savedPost);</code></pre>
+                
+            
+                
+                    <p>As for your post liking endpoint, you'll notice that the endpoint is defined to be "/:id/like." You can think of the colon as denoting a sort of wildcard, accepting any valid string and assigning it the name "id" within request parameters. Request parameters are accessed similar to the request body with &lt;mark&gt;&lt;code&gt;req.params&lt;/code&gt;&lt;/mark&gt;. To handle like/unlike functionality, you need to first fetch this post information. To do so, the "id" request parameter will represent the post's id! This makes it simple to retrieve from your DB, as you have a posts collection in MongoDB. Using your post model (to communicate with your DB), you can use the method &lt;mark&gt;&lt;code&gt;findById()&lt;/code&gt;&lt;/mark&gt; and pass in your request parameter "id" to retrieve your post. Then you'll check to see if the current user has already liked the post, and like or unlike the post accordingly. The "$push" and "$pull" options tells the post model to either insert or delete the current user's id (included in the request body) from the post's "likes" array. Within the try block of // LIKE/UNLIKE POST:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const post = await Post.findById(req.params.id);
+if (!post.likes.includes(req.body.userId)) {
+  await post.updateOne({ $push: { likes: req.body.userId } });
+  res.status(200).json("Post liked");
+} else {
+  await post.updateOne({ $pull: { likes: req.body.userId } });
+  res.status(200).json("Post unliked");
+}</code></pre>
+                
+            
+                
+                    <p>To get a post, you'll need to rely on using request parameters again ("/:id"). The functionality is simple, you find the post in your posts collection by its id, and give a successful response with the post. Within the try block of // GET POST:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const post = await Post.findById(req.params.id);
+res.status(200).json(post);</code></pre>
+                
+            
+                
+                    <p>To get all of one specific user's posts, the logic is quite similar. Again relying on request parameters ("/profile/:username") where username is the user's username, you can utilize the mongoose model's powerful methods again to first search for the user by username in your users collection, then find every post by the user's id in your posts collection. Within the try block of // GET ALL OF ONE USER'S POST:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const user = await User.findOne({ username: req.params.username });
+const posts = await Post.find({ userId: user._id });
+res.status(200).json(posts);</code></pre>
+                
+            
+                
+                    <p>In order to generate a user's timeline, you'll need to consider two things: the current user's posts, and the posts of all of their friends. This is a fairly rudimentary means of generating a timeline, but for the purposes of this project it will do. To do so, you'll rely on request parameters again ("timeline/:userId"), where userId is the current user's id. Retrieve the current user's object by finding by id in your users collection, and then fetch every post authored by the current user in your posts collection. You'll repeat this for each friend in the user's friends list using &lt;code&gt;&lt;mark&gt;Promise.all()&lt;/mark&gt;&lt;/code&gt; which in short, resolves all data fetching procedures in a loop before proceeding. Then you'll concatenate both in a joint list of posts, and return them in the response. Within the try block of // GET TIMELINE:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const currentUser = await User.findById(req.params.userId);
+const userPosts = await Post.find({ userId: currentUser._id });
+const friendPosts = await Promise.all(
+  currentUser.following.map((friendId) =&gt; {
+    return Post.find({ userId: friendId });
+  })
+);
+res.status(200).json(userPosts.concat(...friendPosts));</code></pre>
+                
+            
+                
+                    <p>For your convenience and additional learning, the endpoints for updating and deleting posts are included as well, however they will not be used in this project spec.</p>
+                
+            
+                
+                    <h2>Part 8: Users Endpoints</h2>
+                
+            
+                
+                    <p>Finally, your users endpoint. You'll have five main functionalities: updating a user, getting a user by id or username, get a user's following list (friends), following a user, and unfollowing a user.</p>
+                
+            
+                
+                    <p>For updating a user, only the current user should be able to update their own page. To ensure this, both request body and request parameters will be utilized. The request body will contain the user id making the update request, the parameter is simply the user to be updated. After verifying that both match up, proceed with updating. Password updating is a bit more convoluted as it involves hashing again, so it has been done already for your convenience. The objective of the update is to set all fields in the user document equal to the affected fields in the request body. Within // UPDATE USER:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">await User.findByIdAndUpdate(req.body.userId, {
+  $set: req.body,
+});
+res.status(200).json("Account has been updated");</code></pre>
+                
+            
+                
+                    <p>For the next endpoint you'll be getting users by either userId or username. This is crucial, as the way users are fetched from a profile page (e.g. /profile/bob) need to retrieve the user object from your DB only by username, since in this case we have no access to bob's user id. To do so, request queries are utilized. You know of request body and request parameters already, so this should be fairly intuitive. Request queries are appended onto the end of an endpoint's url. In this case, your endpoint is "/api/users," so a query would be something like "/api/users?username=bob." You can retrieve data from request queries with &lt;mark&gt;&lt;code&gt;req.query&lt;/code&gt;&lt;/mark&gt;. With that in mind, retrieving a user by either userId or username becomes trivial. You check if the query contains either a userId or username, and retrieve the user object accordingly from your DB. Within // GET USER BY ID OR USERNAME:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const userId = req.query.userId;
+const username = req.query.username;
+const user = userId
+  ? await User.findById(userId)
+  : await User.findOne({ username: username });
+const { password, updatedAt, ...other } = user._doc;
+// _doc carries the entire document object in MongoDB. need to remove password and other extranneous information from the response.
+res.status(200).json(other);</code></pre>
+                
+            
+                
+                    <p>For getting a user's following/friends, you will fetch the friends of the user whose id is specified in the request parameter ":userId." To do so, retrieve the user object by userId, then for each friend you retrieve the friend's user object by friendId, keeping only the necessary information (id, username, profile picture), and returning this list in the response. Within // GET FOLLOWING/FRIENDS:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const user = await User.findById(req.params.userId);
+const friends = await Promise.all(
+  user.following.map((friendId) =&gt; {
+    return User.findById(friendId);
+  })
+);
+let friendsList = [];
+friends.map((friend) =&gt; {
+  const { _id, username, profilePicture } = friend;
+  // Only unpack the properties we need, then push
+  friendsList.push({ _id, username, profilePicture });
+});
+res.status(200).json(friendsList);</code></pre>
+                
+            
+                
+                    <p>Now the follow user endpoint. Within the request parameters, you have ":id" which represents the user to be followed. First it needs to be verified that the user to be followed can not be the current user (can't follow yourself). Then, to handle the following procedure, you'll just have to append the current user to the user to be followed's follower list. Try to really understand the code's inner workings, since you have seen this type of architecture so many times now. Within // FOLLOW USER:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const user = await User.findById(req.params.id);
+const currentUser = await User.findById(req.body.userId);
+// If not already following
+if (!user.followers.includes(req.body.userId)) {
+  await user.updateOne({ $push: { followers: req.body.userId } }); // Update both users involved using $push syntax
+  await currentUser.updateOne({ $push: { following: req.params.id } }); // Update both users involved
+  res.status(200).json("Followed user");
+} else {
+  res.status(403).json("Already following");
+}</code></pre>
+                
+            
+                
+                    <p>For a bit of a challenge, try to implement the unfollow endpoint within // UNFOLLOW USER. It's nearly identical to the follow endpoint.</p>
+                
+            
+                
+                    <h2>Part 9: API Endpoint Testing with Postman and User Generation</h2>
+                
+            
+                
+                    <p>In order to verify the correctness of your endpoints, you'll be using Postman. Visit &lt;a href="https://www.postman.com/downloads/" target="_blank"&gt;https://www.postman.com/downloads/&lt;/a&gt; to install Postman. Go ahead and get started with a workspace on within the app.</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        https://calhacks-sierra.s3.us-west-2.amazonaws.com/assets/cubstart/Screen+Shot+2022-01-10+at+6.11.25+PM.png
+                    </div>
+                
+            
+                
+                    <p>Within your workspace, choose to import. The file you'll be choosing is named &lt;mark&gt;&lt;code&gt;hw8.postman_collection.json&lt;/code&gt;&lt;/mark&gt;. This will give you access to all the different HTTP requests you should test. Play around with the tool with the correct parameters, and ensure that they all work properly with the intended behavior in your MongoDB documents before moving on.</p>
+                
+            
+                
+                    <h2>Part 10: Frontend Dependencies and Environment Set-up</h2>
+                
+            
+                
+                    <p>Open a terminal and navigate to the &lt;mark&gt;&lt;code&gt;react-client&lt;/code&gt;&lt;/mark&gt; folder. Run &lt;mark&gt;&lt;code&gt;npm install&lt;/code&gt;&lt;/mark&gt; which will install all the necessary dependencies for the frontend component of this project. Under this same directory, create a file called &lt;mark&gt;&lt;code&gt;.env&lt;/code&gt;&lt;/mark&gt;. Inside, include the following line to specify your public folder directory (where all assets will be stored within your Node.js webserver):</p>
+                
+            
+                
+                    <pre><code class="language-html">REACT_APP_PUBLIC_FOLDER = http://localhost:8800/images/</code></pre>
+                
+            
+                
+                    <p>Open two additional terminals, one at &lt;mark&gt;&lt;code&gt;react-client/&lt;/code&gt;&lt;/mark&gt;, one at &lt;mark&gt;&lt;code&gt;node-rest-api/&lt;/code&gt;&lt;/mark&gt;. Do "npm start" on both terminals to start both your frontend environment and backend webserver. As you make changes, they will be reflected on your frontend environment. Sometimes a runtime error will cause either environment to crash -- just start it up again.</p>
+                
+            
+                
+                    <h2>Part 11: User Context</h2>
+                
+            
+                
+                    <div class="inline-img-container">
+                        https://calhacks-sierra.s3.us-west-2.amazonaws.com/assets/cubstart/Screen+Shot+2022-01-10+at+6.22.37+PM.png
+                    </div>
+                
+            
+                
+                    <p>The entire frontend parent-child component relationships are depicted here. You can see that this tree can become quite convoluted when you need to track something that is globally required to interact with each individual component on this tree, regardless of its hierarchy; namely, user authentication. To validate whether a certain user is signed in across all components would normally require a prop, say "user", that gets passed down across every single component down the tree. This is not sustainable for larger scale apps like this one. Luckily, there is the Context API in React.js that allows you to define these "global props." Context provides a way to pass data through the component tree without having to pass props down manually at every level.</p>
+                
+            
+                
+                    <p>There are three main components to your user context: the provider, reducer, and actions. The provider is what provides the context at each component level. Your context can be thought of as a stateful value (your authenticated user can change while using the app: making a post, following another user, etc.), with a setter function &lt;mark&gt;&lt;code&gt;dispatch&lt;/code&gt;&lt;/mark&gt;. &lt;mark&gt;&lt;code&gt;dispatch&lt;/code&gt;&lt;/mark&gt; uses a reducer to modify your current user state. A reducer updates the user according a performed action (e.g. logging in, following another user, etc.), and the actions are these sets of performed actions to act on.</p>
+                
+            
+                
+                    <p>First up, your actions. Navigate to your &lt;/mark&gt;&lt;/code&gt;src/context&lt;/code&gt;&lt;/mark&gt; folder. Under AuthActions.js, you'll want to build the actions here. Each action is an exported function taking some parameter and returning a JavaScript object with the type of action it's associated with and its payload as a result of enacting the action. For instance, LoginSuccess is of type "LOGIN_SUCCESS," and it gives the logged in user as a result. UpdateProfile is of type "UPDATE_PROFILE," and the payload is the hashed file name of the user's uploaded profile photo. It's all fairly intuitive:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">export const LoginStart = (userCredentials) =&gt; ({
+  type: "LOGIN_START",
+});
+
+export const LoginSuccess = (user) =&gt; ({
+  type: "LOGIN_SUCCESS",
+  payload: user,
+});
+
+export const LoginFailure = (error) =&gt; ({
+  type: "LOGIN_FAILURE",
+  payload: error,
+});
+
+export const Follow = (userId) =&gt; ({
+  type: "FOLLOW",
+  payload: userId,
+});
+
+export const Unfollow = (userId) =&gt; ({
+  type: "UNFOLLOW",
+  payload: userId,
+});</code></pre>
+                
+            
+                
+                    <p>Navigate to "AuthReducer.js." Your reducer needs to understand how to act on certain actions, namely the actions you defined previously. Within the switch statement, you'll handle every action case. The return value is the updated context state, which is an object with three properties: user, isFetching, and error. With this, the reducer hook can correctly update your user state. When you start the log in process, you define the user to be null (no user fetched yet), isFetching to be true, and error to be false (no error encountered yet). If the login is a success, you define the user to be the retrieved user (from the action payload), isFetching to be false (done fetching), and error to be false (no error). Login failure follows a similar line of logic. For the follow and unfollow actions, all that needs to be done is the update the current user object's following list to include/exclude the other user being followed/unfollowed. With a little spread syntax, the following script accomplishes this task:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">case "LOGIN_START":
+  return {
+    user: null,
+    isFetching: true,
+    error: false,
+  };
+case "LOGIN_SUCCESS":
+  return {
+    user: action.payload,
+    isFetching: false,
+    error: false,
+  };
+case "LOGIN_FAILURE":
+  return {
+    user: null,
+    isFetching: false,
+    error: action.payload,
+  };
+case "FOLLOW":
+  return {
+    ...state,
+    user: {
+      ...state.user,
+      following: [...state.user.following, action.payload],
+    },
+  };
+case "UNFOLLOW":
+  return {
+    ...state,
+    user: {
+      ...state.user,
+      following: state.user.following.filter(
+        (following) =&gt; following !== action.payload
+      ),
+    },
+  };</code></pre>
+                
+            
+                
+                    <p>Navigate to "AuthContext.js." Notice that the initial state of your context has some interesting syntax in its "user" field. This simply checks to see if there is already a user that exists in the current session, uses it if there is, and assigns null if not. First, you need to create a context with this initial state:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">export const AuthContext = createContext(INITIAL_STATE);</code></pre>
+                
+            
+                
+                    <p>Next, to establish your provider, you must first initialize the &lt;mark&gt;&lt;code&gt;useReducer()&lt;/code&gt;&lt;/mark&gt; hook. The first parameter is the reducer which you defined earlier, and the second parameter is the initial state to be used. The "state" variable is our context state, and the "dispatch" is the setter function as mentioned earlier. You'll utilize the &lt;mark&gt;&lt;code&gt;useEffect()&lt;/code&gt;&lt;/mark&gt; hook as well to push the current user to local session storage at every action (e.g. logging in). The return value of this component is the provider generated from your "AuthContext" variable which you initialized above. It has the context state object as its prop, and can accept children to which it gives this context all the way down the nested hierarchy:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">export const AuthContextProvider = ({ children }) =&gt; {
+  const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
+
+  useEffect(() =&gt; {
+    localStorage.setItem("user", JSON.stringify(state.user));
+  }, [state.user]);
+
+  return (
+    &lt;AuthContext.Provider
+      value={{
+        user: state.user,
+        isFetching: state.isFetching,
+        error: state.error,
+        dispatch,
+      }}
+    &gt;
+      {children}
+    &lt;/AuthContext.Provider&gt;
+  );
+};</code></pre>
+                
+            
+                
+                    <p>Navigate to "src/loginCalls.js." Here, you'll find that a library "axios" is imported. Axios is a convenient tool that allows you to make HTTP requests with ease. In this file, you'll define the behavior of your user context when a user logs in. Recall that dispatch is the setter function, and initiates the actions and workflows defined in your actions and reducer. First, the function must dispatch the "LOGIN_START" action. Then, you'll get a response from making a POST request to your authentication login endpoint, with your request body being the user's input credentials. If all goes well without error, that means the user's input credentials were valid, so dispatch "LOGIN_SUCCESS" with the user's info grabbed from the DB as its payload. Otherwise, if an error is caught, dispatch "LOGIN_FAILURE," and the payload is now the error instead:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">export const loginCall = async (userCredentials, dispatch) =&gt; {
+  dispatch({ type: "LOGIN_START" });
+  try {
+    const res = await axios.post("/auth/login", userCredentials);
+    dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+  } catch (error) {
+    dispatch({ type: "LOGIN_FAILURE", payload: error });
+  }
+};</code></pre>
+                
+            
+                
+                    <p>Finally, it's time to give your app this context. To do so, simply wrap your App in "index.js" with your &lt;mark&gt;&lt;code&gt;AuthContextProvider&lt;/code&gt;&lt;/mark&gt; (it's already been imported for you).</p>
+                
+            
+                
+                    <h2>Part 12: Topbar Component</h2>
+                
+            
+                
+                    <p>Now, for the actual frontend components. Because you've done plenty of React.js work in the past, this will be fairly short in terms of explanations, mostly just code that you should implement. Navigate to "src/components."</p>
+                
+            
+                
+                    <p>First, your top bar component. In the top right, there's supposed to be the profile photo of the current user that links to the current user's profile. You'll need access to 1) the user, and 2) the public folder in which all assets are stored on your webserver. Retrieve them as such:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">const { user } = useContext(AuthContext);
+const PF = process.env.REACT_APP_PUBLIC_FOLDER;</code></pre>
+                
+            
+                
+                    <p>Now for the JSX in the returned document. The Link component in React allows you to perform a similar action to a tags in HTML, except the DOM is virtually updated and the page is not actually refreshed. This is very convenient and allows for a smoother UI. Implement this Link tag associated with the user's profile photo as such. The "person/noAvatar.jpg" asset is just a default profile photo. You'll use a ternary operator to determine whether or not the user actually has uploaded a profile photo or not. You'll see this pretty often:</p>
+                
+            
+                
+                    <pre><code class="language-jsx">&lt;Link to={`/profile/${user.username}`}&gt;
+  &lt;img
+    src={
+      user.profilePicture
+        ? PF + user.profilePicture
+        : PF + "person/noAvatar.png"
+    }
+    alt=""
+    className="topbarImg"
+  /&gt;
+&lt;/Link&gt;</code></pre>
+                
+            
+                
+                    <h2>Part 13: Post Component</h2>
+                
+            
+                
+                    <p>Your post component has one prop: the post data itself. There are some hooks for liking/unliking already done. Feel free to explore any parts that are not explained within the codebase. You need to build the mechanism to retrieve the post author's user data (to display their profile photo and username on the post). To do so, you'll use axios and the &lt;code&gt;&lt;mark&gt;useEffect()&lt;/mark&gt;&lt;/code&gt; hook. Take note of how everything else falls into place using asynchronous functions, and the stateful values within the JSX return value.</p>
+                
+            
+                
+                    <pre><code class="language-javascript">useEffect(() =&gt; {
+  const fetchUser = async () =&gt; {
+    const res = await axios.get(`/users?userId=${post.userId}`);
+    setUser(res.data);
+  };
+  fetchUser();
+}, [post.userId]);</code></pre>
+                
+            
+                
+                    <h2>Part 14: Feed Component</h2>
+                
+            
+                
+                    <p>The feed component is essentially a rendered view of some collection of posts. There are two use cases for this component: 1) for a user's timeline (which you defined in an endpoint) and 2) display all posts from one user (as it would be in viewing someones profile). The relevant state hook is already defined for you, and the current user has been derived from your context. Implement the following, and try to understand what each line is doing with its requests to your endpoints:</p>
+                
+            
+                
+                    <pre><code class="language-javascript">useEffect(() =&gt; {
+  const fetchPosts = async () =&gt; {
+    const res = username
+      ? await axios.get(`/posts/profile/${username}`)
+      : await axios.get(`/posts/timeline/${user._id}`);
+    setPosts(
+      res.data.sort((p1, p2) =&gt; {
+        return new Date(p2.createdAt) - new Date(p1.createdAt);
+      })
+    );
+  };
+  fetchPosts();
+}, [username, user._id]);</code></pre>
+                
+            
+                
+                    <h2>Part 15: Rightbar Component</h2>
+                
+            
+                
+                    <p>The rightbar component should handle friends lists in two settings: the home page, and the profile page. When on the home page, the current user should see their friends on the rightbar. When on any profile page, the current user should see the friends of that profile's user. The currentFriends fetching (for home page usage) is already done. You'll need to implement a similar friends fetching (for profile page usage), in a very similar fashion. Note that the relevant stateful value here is "friends," and the setter is "setFriends."</p>
+                
+            
+                
+                    <pre><code class="language-javascript">useEffect(() =&gt; {
+  const getFriends = async () =&gt; {
+    try {
+      const friendsList = await axios.get(`/users/friends/${user?._id}`);
+      setFriends(friendsList.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  getFriends();
+}, [user?._id]);</code></pre>
+                
+            
+                
+                    <p>There is additional functionality in the codebase, including following/unfollowing, but they are all very similar in implementation. Feel free to navigate them and ask questions if needed.</p>
+                
+            
+                
+                    <h2>Part 16: React Routing</h2>
+                
+            
+                
+                    <p>Lastly, take a look at "src/App.js." This is the top level of your entire application, and thus where your React Routes go. Each Route component dictates what needs to be rendered at what route. Because your context tells the entire application level what the status of your current user is, it can determine whether or not to redirect users back to the login/registration screen at every route. Congratulations, you've now built the core functionality end-to-end of an extremely involved MERN stack social network application! Try using the app as a normal user, and create fake users to interact with!</p>
+                
+            
+            <h2 id="submission">Submission</h2>
+            <p>
+                Navigate to your
+                <mark><code>cubstart</code></mark>
+                directory. In your terminal, stage your changes, commit them, and push them to your remote cubstart GitHub repository.
+                Graders will review your most recent commit where the relevant homework was modified. Be sure to submit your GitHub repo on gradescope in the appropriate assignment.</p><pre><code class="language-bash">git add .
+git commit -m "final submission"
+git push origin master</code></pre>
+            
+        </div>
+        <script>
+            hljs.highlightAll();
+        </script>
+        <script>
+            const imageBlocks = document.querySelectorAll('.inline-img-container');
+            Array.from(imageBlocks).forEach(block => {
+                const link = block.innerHTML.replace(/\s/g, '');
+                block.innerHTML = '';
+                const image = document.createElement('img');
+                image.src = link
+                image.className = 'inline-img';
+                block.appendChild(image);
+            })
+        </script>
+        <script>
+            var stringToHTML = function (str) {
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(str, 'text/html');
+                return doc.body;
+            };
+            function decodeHtml(html) {
+                var txt = document.createElement("textarea");
+                txt.innerHTML = html;
+                return txt.value;
+            }
+            const sideNav = document.getElementById("nav-topics");
+            const mainContent = document.getElementById("main");
+            const topics = mainContent.getElementsByTagName('h2');
+            Array
+                .from(topics)
+                .forEach(topic => {
+                    const convertedInnerHTML = topic
+                        .innerHTML
+                        .replace(/\s+/g, '-')
+                        .toLowerCase();
+                    topic.id = convertedInnerHTML
+                })
+                Array
+                .from(topics)
+                .forEach(topic => {
+                    const sideHeader = document.createElement('a');
+                    sideHeader.innerHTML = topic.innerHTML
+                    sideHeader.href = '#' + topic.id
+                    sideNav.appendChild(sideHeader)
+                })
+            const paragraphs = mainContent.getElementsByTagName('p');
+            Array.from(paragraphs).forEach(paragraph => {
+                const convertedInnerHTML = stringToHTML(decodeHtml(paragraph.innerHTML))
+                paragraph.innerHTML = ""
+                paragraph.appendChild(convertedInnerHTML)
+            })
+        </script>
+    </body>
+</html>
